@@ -29,4 +29,3 @@ runs:
           /opt/ghc
         echo "Available storage after:"
         df -h --total
-~
