@@ -1,0 +1,32 @@
+    extension = TAR_EXTENSION,
+    package_file_name = "{fname}.{ext}".format(
+        ext = TAR_EXTENSION,
+        fname = "feg_python_executables",
+    ),
+    tags = ["no-cache"],
+)
+
+pkg_filegroup(
+    name = "cwf_python_services",
+    srcs = ["//lte/gateway/python:cwf_lte_python_services"],
+    prefix = PY_DEST,
+    tags = ["no-cache"],
+)
+
+# This target is used to bundle the Python services,
+# including all runfiles and pip dependencies, used only in the
+# CWF integration tests. The tar file can be copied between builder
+# and runtime Docker images.
+pkg_tar(
+    name = "cwf_python_executables_tar",
+    srcs = [
+        ":cwf_python_services",
+        ":magma_configs",
+    ],
+    extension = TAR_EXTENSION,
+    package_file_name = "{fname}.{ext}".format(
+        ext = TAR_EXTENSION,
+        fname = "cwf_python_executables",
+    ),
+    tags = ["no-cache"],
+)
